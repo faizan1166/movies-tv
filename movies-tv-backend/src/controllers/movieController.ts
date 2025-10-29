@@ -15,35 +15,40 @@ export const addMovie = async (req: Request, res: Response) => {
 
 export const getMovies = async (req: Request, res: Response) => {
   try {
+    const page = parseInt((req.query.page as string) ?? "1", 10);
     const limit = Math.min(
-      parseInt((req.query.limit as string) ?? "20", 10),
+      parseInt((req.query.limit as string) ?? "10", 10),
       100
     );
-    const cursor = req.query.cursor as string | undefined;
-    const query: any = {};
 
-    if (cursor && mongoose.Types.ObjectId.isValid(cursor)) {
-      query._id = { $lt: new mongoose.Types.ObjectId(cursor) };
-    }
+    const skip = (page - 1) * limit;
+    const total = await Movie.countDocuments();
+    const totalPages = Math.ceil(total / limit);
 
-    const docs = await Movie.find(query)
+    const movies = await Movie.find()
       .sort({ _id: -1 })
-      .limit(limit + 1)
+      .skip(skip)
+      .limit(limit)
       .lean();
 
-    let nextCursor: string | null = null;
-    if (docs.length > limit) {
-      nextCursor = docs[limit]._id.toString();
-      docs.splice(limit, 1);
-    }
-
-    res.json({ data: docs, nextCursor });
+    res.json({
+      data: movies,
+      pagination: {
+        page,
+        totalPages,
+        total,
+        hasNext: page < totalPages,
+        hasPrev: page > 1,
+      },
+    });
   } catch (err) {
-    res
-      .status(500)
-      .json({ message: "Error fetching movies", error: String(err) });
+    res.status(500).json({
+      message: "Error fetching movies",
+      error: String(err),
+    });
   }
 };
+
 
 export const updateMovie = async (req: Request, res: Response) => {
   try {
