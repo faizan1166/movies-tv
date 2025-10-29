@@ -1,0 +1,24 @@
+{
+  "name": "movies-tv-backend",
+  "version": "1.0.0",
+  "description": "Movies & TV Shows backend",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "ts-node --transpile-only src/server.ts",
+    "build": "tsc -p .",
+    "start": "node dist/server.ts"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.3.4"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "@types/node": "^24.9.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
