@@ -49,7 +49,6 @@ export const getMovies = async (req: Request, res: Response) => {
   }
 };
 
-
 export const updateMovie = async (req: Request, res: Response) => {
   try {
     const updated = await Movie.findByIdAndUpdate(req.params.id, req.body, {
@@ -73,5 +72,33 @@ export const deleteMovie = async (req: Request, res: Response) => {
     res
       .status(400)
       .json({ message: "Error deleting movie", error: String(err) });
+  }
+};
+
+export const searchMovies = async (req: Request, res: Response) => {
+  try {
+    const query = (req.query.q as string)?.trim();
+
+    if (!query) {
+      return res.status(400).json({ message: "Search query is required" });
+    }
+
+    const movies = await Movie.find({
+      $or: [
+        { title: { $regex: query, $options: "i" } },
+        { type: { $regex: query, $options: "i" } },
+        { director: { $regex: query, $options: "i" } },
+        { description: { $regex: query, $options: "i" } },
+      ],
+    })
+      .sort({ _id: -1 })
+      .lean();
+
+    res.json({ data: movies });
+  } catch (err) {
+    res.status(500).json({
+      message: "Error searching movies",
+      error: String(err),
+    });
   }
 };
