@@ -1,0 +1,33 @@
+{
+  "data": [
+    {
+      "_id": "6900be2491c3f09ee727f6f8",
+      "title": "Breaking Bad",
+      "type": "TV Show",
+      "director": "Vince Gilligan",
+      "budget": "$3 million per episode",
+      "location": "Albuquerque, New Mexico",
+      "duration": "5 Seasons",
+      "yearOrTime": "2008–2013",
+      "description": "A high school chemistry teacher turned methamphetamine producer teams up with a former student to secure his family's future.",
+      "posterUrl": "https://image.tmdb.org/t/p/original/ggFHVNu6YYI5L9pCfOacjizRGt.jpg",
+      "createdAt": "2025-10-28T12:59:16.546Z",
+      "__v": 0
+    },
+    {
+      "_id": "6900bdef91c3f09ee727f6f4",
+      "title": "Inception",
+      "type": "Movie",
+      "director": "Christopher Nolan",
+      "budget": "$160 million",
+      "location": "Los Angeles, California",
+      "duration": "2h 28m",
+      "yearOrTime": "2010",
+      "description": "A skilled thief who steals secrets through dream-sharing technology is given a chance to have his criminal history erased if he can plant an idea in someone's mind.",
+      "posterUrl": "https://image.tmdb.org/t/p/original/qmDpIHrmpJINaRKAfWQfftjCdyi.jpg",
+      "createdAt": "2025-10-28T12:58:23.925Z",
+      "__v": 0
+    }
+  ],
+  "nextCursor": null
+}
