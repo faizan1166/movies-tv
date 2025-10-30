@@ -1,6 +1,6 @@
 import React from "react";
 import type { Movie } from "../../types";
-import { Delete, DeleteIcon, Edit, Trash } from "lucide-react";
+import { Edit, Trash } from "lucide-react";
 
 interface TableProps {
   movies: Movie[];
